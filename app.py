@@ -115,6 +115,10 @@ def create_app(config_name=None):
         seed_sample_data()
         print("Database bootstrapped successfully.")
 
+    # Automatically create database tables
+    with app.app_context():
+        db.create_all()
+
     return app
 
 
