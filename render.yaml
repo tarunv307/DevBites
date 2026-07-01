@@ -2,10 +2,12 @@ services:
   - type: web
     name: devbites
     runtime: python
-    buildCommand: pip install -r requirements.txt
-    preDeployCommand: flask bootstrap-db
+    buildCommand: python -m pip install -r requirements.txt
+    preDeployCommand: python -m flask bootstrap-db
     startCommand: gunicorn wsgi:app
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.15
       - key: FLASK_ENV
         value: production
       - key: SECRET_KEY
