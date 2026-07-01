@@ -162,6 +162,9 @@ All variables are read in `config.py`. Copy `.env.example` to `.env` and adjust 
 | `DB_PORT` | Yes* | `3306` | MySQL port |
 | `DB_NAME` | Yes* | `devbites_db` | MySQL database name |
 | `DATABASE_URL` | No | — | Full SQLAlchemy URL; overrides all `DB_*` vars above when set |
+| `SUPABASE_DB_URL` | No | — | Alternate Postgres URL for Supabase; used when `DATABASE_URL` is not set |
+| `SUPABASE_URL` | No | — | Optional Supabase project URL for client-side integration |
+| `SUPABASE_ANON_KEY` | No | — | Optional public Supabase anon key for frontend use only |
 
 \* Not required if `DATABASE_URL` is set directly, and not used at all when running the test suite (which always uses in-memory SQLite regardless of `.env`).
 

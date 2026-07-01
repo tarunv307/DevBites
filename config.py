@@ -25,11 +25,14 @@ class Config:
     DB_HOST = os.environ.get("DB_HOST", "localhost")
     DB_PORT = os.environ.get("DB_PORT", "3306")
     DB_NAME = os.environ.get("DB_NAME", "devbites_db")
+    SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
 
-    SQLALCHEMY_DATABASE_URI = normalize_database_url(os.environ.get(
-        "DATABASE_URL",
-        f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
-    ))
+    SQLALCHEMY_DATABASE_URI = normalize_database_url(
+        os.environ.get(
+            "DATABASE_URL",
+            SUPABASE_DB_URL or f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
+        )
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_recycle": 280, "pool_pre_ping": True}
 
@@ -46,6 +49,9 @@ class Config:
 
     CERTIFICATES_FOLDER = os.path.join(basedir, "certificates")
     UPLOAD_FOLDER = os.path.join(basedir, "static", "uploads")
+
+    SUPABASE_URL = os.environ.get("SUPABASE_URL")
+    SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
 
     BITES_PER_PAGE = 9
     XP_PER_BITE = 10
